@@ -1,6 +1,16 @@
 # NCU_AI-ML
 108 2nd semester
 
+## HW2 RNN 股價預測
+### 需求
+預測南亞電路(8046)的股價，並以產業類別相關的欣興電子(3037)之歷史資料集(3037_2010_2019_csv.csv)來輔助預測
+
+### 結果
+- 作法：
+  1. 利用前20天(time_step=20)的5種資料(input_size=5)來預測最後一天的收盤價(output_size=1)。
+  2. 5種資料分別是：8046的open、high、low、close、以及3037的close。
+  3. 用load_data()將data frame切分成x_train、y_train、x_test、y_test。一開始是以每time_step天的資料為單位append進data中。之後再從data去切分訓練和測試集。另外，測試集的大小(test_size)不能是30的原因是，如果需要預測最後30天，肯定需要再往前抓前面time_step天才能預測這30筆。
+  4. get_next_batch()，參考了網路上教學的做法，我覺得這個取法對我來說比較直觀一些。在訓練的時候會再用它動態抓取1 batch所需的資料來當作X、Y。index_in_epoch是global variable，是用來紀錄下次要開始取的訓練集的index，每次抓完一batch的資料都會再讓它加上batch_size，直到index值超過訓練集大小(代表一個epoch結束)也會重新給值。比較特別的地方還有perm_array，它是長度與訓練集相同、內容分別是0~訓練集長度-1、且順序是shuffle過的array，它的用途是用來當作從訓練集取出資料的index順序。每個epoch結束後也會重新shuffle一次，這樣就不會每個epoch的同個batch都抓固定的那batch_size筆的資料去train，目的是降低overfitting的可能性。
 
 ## HW3 QLearning 走迷宮
 ### 需求
