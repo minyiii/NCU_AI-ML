@@ -9,11 +9,11 @@
 3. 一開始是以每time_step天的資料為單位append進data中，之後再從data去切分訓練和測試集。
 
 ### 變數解釋
-1. get_next_batch()
+- get_next_batch()
   > 參考了網路上教學的做法，我覺得這個取法對我來說比較直觀。訓練時會再用它動態抓取1 batch所需的資料來當作X、Y。
-2. index_in_epoch
+- index_in_epoch
   > 為 global variable，用來紀錄下次要開始取的訓練集的index，每次抓完一batch的資料都會再讓它加上batch_size，直到index值超過訓練集大小(代表一個epoch結束)也會重新給值。
-3. perm_array
+- perm_array
   > 它是長度與訓練集相同、內容分別是0~訓練集長度-1、且順序是shuffle過的array，它的用途是用來當作從訓練集取出資料的index順序。每個epoch結束後也會重新shuffle一次，這樣就不會每個epoch的同個batch都抓固定的那batch_size筆的資料去train，目的是降低overfitting的可能性。
 
 ## HW3 QLearning 走迷宮
