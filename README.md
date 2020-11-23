@@ -21,7 +21,8 @@
 ## HW3 QLearning 走迷宮
 ### 需求
 以Q-Learning在二維空間中進行尋找寶藏遊戲，空間設為30*40(x=30、y=40)，動作為: 上、下、左、右，寶藏放在右下角的位置，探索者起始點設在左上角。
-### 最低步數：77步
+### 最低步數
+77步
 ### 作法：
 - 變數值設定如下，ENV_COL、ENV_ROW是環境的column及row數。
 - 因不知會有多少state，所以Q table中的每row都是動態去append。主要會透過check_state_exist() 來檢查該state是否已存在於Q table中，若不在會自動append新的row，其中每個action值都會預設為0。
